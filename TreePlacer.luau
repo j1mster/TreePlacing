@@ -138,18 +138,18 @@ function SpawnTrees(Trees, TreeCount, Start, End, SpecifiedFolder, SilenceWarnin
 			Tree:Destroy()
 			continue 
 		end
-
-		local PositionX, PositionY, PositionZ = math.random(Start.X, End.X), nil, math.random(Start.Z, End.Z)
+		local t = 50
+		local PositionX, PositionY, PositionZ = nil, nil, nil
 		repeat 
-			local PositionY = getY(Tree, Vector3.new(PositionX, WorldTop, PositionZ), WorldBottom)
+			t = t - 1
+			PositionX, PositionY, PositionZ = math.random(Start.X, End.X), getY(Tree, Vector3.new(PositionX, WorldTop, PositionZ), WorldBottom), math.random(Start.Z, End.Z)
+		until PositionY or t==0
 
-			if not PositionY then 
-				Failed[i] = "Unable to create Y"
-				Tree:Destroy()
-				continue 
-			end
-		until PositionY
-
+		if not PositionY then 
+			Failed[i] = "Unable to create Y"
+			Tree:Destroy()
+			continue 
+		end
 
 		Tree:PivotTo(CFrame.new(Vector3.new(PositionX, PositionY, PositionZ)) * CFrame.Angles(0, math.rad(math.random(0, 180)), 0))
 		Tree.Parent = Folder
