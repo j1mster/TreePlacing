@@ -138,6 +138,7 @@ function SpawnTrees(Trees, TreeCount, Start, End, SpecifiedFolder, SilenceWarnin
 			Tree:Destroy()
 			continue 
 		end
+
 		local t = 50
 		local PositionX, PositionY, PositionZ = nil, nil, nil
 		repeat 
