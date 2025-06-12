@@ -94,7 +94,7 @@ local function getY(Model : Model, Position, HighestY)
 		end
 	end
 
-	return false
+	return nil
 end
 
 
@@ -138,12 +138,13 @@ function SpawnTrees(Trees, TreeCount, Start, End, SpecifiedFolder, SilenceWarnin
 			Tree:Destroy()
 			continue 
 		end
-
+		
 		local t = 50
 		local PositionX, PositionY, PositionZ = nil, nil, nil
 		repeat 
 			t = t - 1
-			PositionX, PositionY, PositionZ = math.random(Start.X, End.X), getY(Tree, Vector3.new(PositionX, WorldTop, PositionZ), WorldBottom), math.random(Start.Z, End.Z)
+			PositionX, PositionZ = math.random(Start.X, End.X)-0.5, math.random(Start.Z, End.Z)-0.5
+			PositionY = getY(Tree, Vector3.new(PositionX, WorldTop, PositionZ), WorldBottom)
 		until PositionY or t==0
 
 		if not PositionY then 
